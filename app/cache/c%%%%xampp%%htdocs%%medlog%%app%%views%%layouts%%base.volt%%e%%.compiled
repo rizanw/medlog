@@ -1,0 +1,17 @@
+a:5:{i:0;s:622:"<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+    <link href="<?= $this->url->get('css/index.css') ?>" rel="stylesheet">
+<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
+<script src="<?= $this->url->get('js/fa.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+    <title>";s:5:"title";N;i:1;s:36:" - MedLog</title>
+</head>
+<body>
+";s:7:"content";N;i:2;s:18:"
+</body>
+</html>";}

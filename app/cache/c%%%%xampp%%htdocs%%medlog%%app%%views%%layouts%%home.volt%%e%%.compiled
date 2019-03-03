@@ -1,0 +1,156 @@
+a:5:{i:0;s:1026:"<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+    <link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
+<script src="<?= $this->url->get('js/fa.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+    <link href="<?= $this->url->get('css/dokter.css') ?>" rel="stylesheet">
+    <link href="<?= $this->url->get('css/tabulator.min.css') ?>" rel="stylesheet">
+    <script src="<?= $this->url->get('js/tabulator.min.js') ?>"></script>
+<?php } else { ?>
+    <link href="<?= $this->url->get('css/pasien.css') ?>" rel="stylesheet">
+<?php } ?>
+    <title>";s:5:"title";N;i:1;s:5081:" - MedLog</title>
+</head>
+<body style="font-family: 'Ubuntu'">
+<nav class="nav">
+    <div class="nav-header">
+        <div class="nav-title">
+            <a href="<?= $this->url->get('') ?>">
+            <img src="<?= $this->url->get('img/logo-letter-wh.png') ?>" width="90px">
+            </a>
+        </div>
+    </div>
+    <div id="nav-side" class="nav-btn">
+        <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+    <input type="checkbox" id="nav-check">
+    <div class="nav-links">
+        <?php if ($this->session->has('auth')) { ?>
+             <?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+                <a href="<?= $this->url->get('dokterhome') ?>">
+                    <i class="fas fa-home"> </i>
+                    Beranda
+                </a>
+                <a href="<?= $this->url->get('dokterlogout') ?>">
+                    <i class="fas fa-sign-out-alt"> </i>
+                    Keluar
+                </a>
+             <?php } else { ?>
+                <a href="<?= $this->url->get('pasienhome') ?>">
+                    <i class="fas fa-home"> </i>
+                    Beranda
+                </a>
+                <a href="<?= $this->url->get('pasienlogout') ?>">
+                    <i class="fas fa-sign-out-alt"> </i>
+                    Keluar
+                </a>
+             <?php } ?>
+        <?php } else { ?>
+            <div class="nav-ddown">
+                <button class="nav-dropbtn">Masuk</button>
+                <div class="nav-dropctn">
+                    <a href="<?= $this->url->get('dokterlogin') ?>">
+                        <i class="fas fa-user-md"></i>
+                        Dokter
+                    </a>
+                    <a href="<?= $this->url->get('pasienlogin') ?>">
+                        <i class="fas fa-user"></i>
+                        Pasien
+                    </a>
+                </div>
+            </div>
+            <div class="nav-ddown">
+                <button class="nav-dropbtn">Daftar</button>
+                <div class="nav-dropctn">
+                    <a href="<?= $this->url->get('dokterregister') ?>">
+                        <i class="fas fa-user-md"></i>
+                        Dokter
+                    </a>
+                    <a href="<?= $this->url->get('pasienregister') ?>">
+                        <i class="fas fa-user"></i>
+                        Pasien
+                    </a>
+                </div>
+            </div>
+            <div class="nav-ddown" style="padding: 10px"></div>
+            <a href="">Masuk sebagai : </a>
+            <a href="<?= $this->url->get('dokterlogin') ?>">
+                <i class="fas fa-user-md"></i>
+                Dokter
+            </a>
+            <a href="<?= $this->url->get('pasienlogin') ?>">
+                <i class="fas fa-user"></i>
+                Pasien
+            </a>
+        <?php } ?>
+    </div>
+</nav>
+<input type="checkbox" id="nav-check">
+<nav class="sidebar">
+    <ul class="sidemenu">
+        <?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+            <li>
+                <a href="<?= $this->url->get('dokterhome') ?>">
+                    <i class="fas fa-home"> </i>
+                    Beranda
+                </a>
+            </li>
+            <li><a href="<?= $this->url->get('lihatpasien') ?>">
+                    <i class="fas fa-users"> </i>
+                    Pasien
+                </a>
+            </li>
+            <li><a href="<?= $this->url->get('show404') ?>">
+                    <i class="fas fa-file-medical-alt"> </i>
+                    Template SOAP
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fas fa-cog"></i>
+                    Pengaturan
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="<?= $this->url->get('datadokter') ?>">
+                            <i class="fas fa-user-circle"></i>
+                            Profil
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">Apalagi?</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-log">
+                <a href="<?= $this->url->get('dokterlogout') ?>">
+                    <i class="fas fa-sign-out-alt"> </i>
+                    logout
+                </a>
+            </li>
+        <?php } else { ?>
+            <li><a href="<?= $this->url->get('pasienhome') ?>">Home</a></li>
+            <li><a href="<?= $this->url->get('lihatpasien') ?>">Lihat Pasien</a></li>
+            <li><a href="">Pengaturan</a>
+                <ul class="submenu">
+                    <li><a href="<?= $this->url->get('datapasien') ?>">Lengkapi Data</a></li>
+                    <li><a href="">Apalagi?</a></li>
+                </ul>
+            </li>
+        <?php } ?>
+    </ul>
+</nav>
+";s:7:"content";N;i:2;s:18:"
+</body>
+</html>";}

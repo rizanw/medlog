@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link href="<?= $this->url->get('css/tabulator.min.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<script src="<?= $this->url->get('js/tabulator.min.js') ?>"></script>
+<?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+    <link href="<?= $this->url->get('css/dokter.css') ?>" rel="stylesheet">
+<?php } else { ?>
+    <link href="<?= $this->url->get('css/pasien.css') ?>" rel="stylesheet">
+<?php } ?>
+    <title>Login disini - MedLog</title>
+</head>
+<body>
+<nav class="nav">
+    <div id="nav-side" class="nav-btn">
+        <i class="fas fa-bars fa-lg"></i>
+    </div>
+</nav>
+<nav class="sidebar">
+    <div class="side-header">
+        <a href="<?= $this->url->get('') ?>">
+            <img src="<?= $this->url->get('img/ver-wh.svg') ?>">
+        </a>
+    </div>
+    <div class="side-menu">
+        <ul>
+            <li>
+                <a href="<?= $this->url->get('dokter/home') ?>">
+                    <i class="fas fa-home"> </i>
+                    <span>Beranda</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-users"> </i>
+                    <span>Pasien</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/lihatpasien') ?>">
+                                <i class="fas fa-list-ul"></i>
+                                <span>Daftar Pasien</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/tambahpasien') ?>">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Tambah Pasien</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-cog"> </i>
+                    <span>Pengaturan</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get() ?>">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Template SOAP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="dashboard-main">
+    
+
+    <div class="home-content" align="center">
+        <form style="padding: 25% 0px;" action="<?= $this->url->get('dokter/tambahpasien') ?>" method="post">
+            <h3>Masukkan no. rekam medis pasien</h3>
+            <div class="input-group">
+                <div class="input-group-front">10/665/</div>
+                <div class="input-group-ctn">
+                    <input type="idpasien" name="idpasien" id="idpasien">
+                </div>
+                <div class="input-group-back">
+                    <input type="submit" value="Tambah">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
+<script src="<?= $this->url->get('js/fa.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+</body>
+</html>

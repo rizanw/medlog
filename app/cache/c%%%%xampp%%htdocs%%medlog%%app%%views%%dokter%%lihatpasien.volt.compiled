@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link href="<?= $this->url->get('css/tabulator.min.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<script src="<?= $this->url->get('js/tabulator.min.js') ?>"></script>
+<?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+    <link href="<?= $this->url->get('css/dokter.css') ?>" rel="stylesheet">
+<?php } else { ?>
+    <link href="<?= $this->url->get('css/pasien.css') ?>" rel="stylesheet">
+<?php } ?>
+    <title>Daftar Pasien - MedLog</title>
+</head>
+<body>
+<nav class="nav">
+    <div id="nav-side" class="nav-btn">
+        <i class="fas fa-bars fa-lg"></i>
+    </div>
+</nav>
+<nav class="sidebar">
+    <div class="side-header">
+        <a href="<?= $this->url->get('') ?>">
+            <img src="<?= $this->url->get('img/ver-wh.svg') ?>">
+        </a>
+    </div>
+    <div class="side-menu">
+        <ul>
+            <li>
+                <a href="<?= $this->url->get('dokter/home') ?>">
+                    <i class="fas fa-home"> </i>
+                    <span>Beranda</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-users"> </i>
+                    <span>Pasien</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/lihatpasien') ?>">
+                                <i class="fas fa-list-ul"></i>
+                                <span>Daftar Pasien</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/tambahpasien') ?>">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Tambah Pasien</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-cog"> </i>
+                    <span>Pengaturan</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get() ?>">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Template SOAP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="dashboard-main">
+    
+    <div class="home-content">
+        <a href="<?= $this->url->get('dokter/tambahpasien') ?>">
+            <button class="btn-eve">Tambahkan pasien</button>
+        </a>
+        <div id="daftar-pasien"></div>
+    </div>
+
+    <script>
+        var table = new Tabulator("#daftar-pasien", {
+            height: "311px",
+            layout: "fitColumns",
+            placeholder: "No Data Set",
+            columns: [
+                {title: "No", field: "no", formatter: "rownum", width: 10},
+                {title: "Id Pasien", field: "id"},
+                {title: "Nama Pasien", field: "nama"},
+                {title: "Jenis Kelamin", field: "jkel"},
+                {
+                    title: "Lihat", field: "link", formatter: "link", formatterParams: {
+                        labelField: "name",
+                        label: "Lihat",
+                        urlPrefix: "<?= $this->url->get('dokter/detailpasien/') ?>",
+                        target: "_blank",
+                    }
+                },
+                {
+                    title: "Hapus", field: "link", formatter: "link", formatterParams: {
+                        labelField: "name",
+                        label: "Hapus",
+                        urlPrefix: "<?= $this->url->get('dokter/hapuspasien/') ?>",
+                        // target: "_blank",
+                    }
+                }
+            ],
+        });
+        table.setData("<?= $this->url->get('dokter/lihatpasien') ?>");
+    </script>
+
+</div>
+<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
+<script src="<?= $this->url->get('js/fa.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+</body>
+</html>

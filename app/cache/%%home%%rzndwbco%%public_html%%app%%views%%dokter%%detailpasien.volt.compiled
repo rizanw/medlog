@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?= $this->url->get('img/favicon.ico') ?>" type="image/x-icon"/>
+<link href="<?= $this->url->get('css/tabulator.min.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<script src="<?= $this->url->get('js/tabulator.min.js') ?>"></script>
+<?php if ($this->session->get('auth')['tipe'] == 1) { ?>
+    <link href="<?= $this->url->get('css/dokter.css') ?>" rel="stylesheet">
+<?php } else { ?>
+    <link href="<?= $this->url->get('css/pasien.css') ?>" rel="stylesheet">
+<?php } ?>
+    <title>Detail Pasien - MedLog</title>
+</head>
+<body>
+<nav class="nav">
+    <div id="nav-side" class="nav-btn">
+        <i class="fas fa-bars fa-lg"></i>
+    </div>
+</nav>
+<nav class="sidebar">
+    <div class="side-header">
+        <a href="<?= $this->url->get('') ?>">
+            <img src="<?= $this->url->get('img/ver-wh.svg') ?>">
+        </a>
+    </div>
+    <div class="side-menu">
+        <ul>
+            <li>
+                <a href="<?= $this->url->get('dokter/home') ?>">
+                    <i class="fas fa-home"> </i>
+                    <span>Beranda</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-users"> </i>
+                    <span>Pasien</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/lihatpasien') ?>">
+                                <i class="fas fa-list-ul"></i>
+                                <span>Daftar Pasien</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->url->get('dokter/tambahpasien') ?>">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Tambah Pasien</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="<?= $this->url->get() ?>">
+                    <i class="fas fa-cog"> </i>
+                    <span>Pengaturan</span>
+                </a>
+                <div class="side-submenu">
+                    <ul>
+                        <li>
+                            <a href="<?= $this->url->get() ?>">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Template SOAP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="dashboard-main">
+    
+    <div class="home-content">
+        <div class="profil-content" style="border: 1px solid green">
+            <div class="profil-pict inline">
+                
+                <br>
+                <i class></i>
+            </div>
+            <div class="inline profil-info">
+                <table>
+                        <tr>
+                            <img src="data:image/jpg/png;base64,<?= $pasien->foto ?>" height="140px;" />
+                            </tr>
+                    <tr>
+                        <td class="title">Nama:</td>
+                        <td><?= $pasien->nama ?></td>
+                    </tr>
+                    <tr>
+                        <td class="title">NIK:</td>
+                        <td><?= $pasien->nik ?></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Tanggal Lahir:</td>
+                        <td><?= $pasien->tgllahir ?></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Jenis Kelamin:</td>
+                        <td><?= $pasien->jkel ?></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Alamat:</td>
+                        <td><?= $pasien->alamat ?></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Telp:</td>
+                        <td><?= $pasien->telepon ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h3 style="margin-bottom: 5px">Menu</h3>
+            <div style="margin-bottom: 8px" class="fbx-container">
+                <button onclick="location.href = '<?= $this->url->get('dokter/detailpasien/') ?> <?= $pasien->idpasien ?> <?= '/periksa' ?>';" style="background-color: #38b1eb">
+                    <i class="fas fa-user-plus"></i>
+                    <span> Periksa Pasien</span>
+                </button>
+            </div>
+        </div>
+
+        
+
+        <div id="riwayat-pasien"></div>
+    </div>
+    <script>
+        var table = new Tabulator("#riwayat-pasien", {
+            height: "311px",
+            layout: "fitColumns",
+            placeholder: "Tidak Ada Riwayat",
+            columns: [
+                {title: "No", field: "no", formatter: "rownum", width: 10},
+                {title: "Tanggal", field: "tgl"},
+                {title: "Keluhan", field: "keluhan"},
+                {title: "Prognosis", field: "prognosis"},
+                {
+                    title: "Lihat", field: "link", formatter: "link", formatterParams: {
+                        labelField: "lihat",
+                        label: "Lihat",
+                         urlPrefix: "<?= $this->url->get('dokter/rekammedis/') ?>",
+//                        urlPrefix: "<?= $this->url->get('rekammedis/') ?>",
+                        target: "_blank",
+                    }
+                },
+            ],
+        });
+        table.setData("<?= $this->url->get('dokter/detailpasiendata/') ?><?= $pasien->idpasien ?>");
+    </script>
+
+</div>
+<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
+<script src="<?= $this->url->get('js/fa.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+</body>
+</html>
