@@ -1,4 +1,0 @@
-<script src="<?= $this->url->get('js/jquery-3.3.1.slim.min.js') ?>"></script>
-<script src="<?= $this->url->get('js/fa.js') ?>"></script>
-
-<script src="<?= $this->url->get('js/script.js') ?>"></script>
